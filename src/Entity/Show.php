@@ -10,11 +10,22 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use App\Entity\Theater;
 use App\Entity\Ticket;
+use App\Controller\ShowController;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ShowRepository")
  * @ORM\Table(name="shows")
- * @ApiResource
+ * @ApiResource(
+ *     itemOperations={
+ *         "delete","get","put",
+ *         "reserved"={
+ *             "method"="PUT",
+ *             "path"="/show/{id}/reserved/",
+ *             "requirements"={"id"="\d+"},
+ *             "controller"=ShowController::class
+ *         }
+ *     }
+ * )
  */
 class Show
 {
@@ -80,7 +91,7 @@ class Show
      * @var Ticket[] Available tickets for this show.
      *
      * @ORM\OneToMany(targetEntity="Ticket", mappedBy="show")
-     * @ApiSubresource
+     *
      */
     private $tickets;
 
