@@ -56,6 +56,11 @@ class Ticket
     private $price;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\HistoryBuyTickets", inversedBy="ticket_id")
+     */
+    private $historyBuyTickets;
+
+    /**
      * Ticket constructor.
      * @param $id2
      */
@@ -118,6 +123,18 @@ class Ticket
     public function setPrice(float $price): self
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    public function getHistoryBuyTickets(): ?HistoryBuyTickets
+    {
+        return $this->historyBuyTickets;
+    }
+
+    public function setHistoryBuyTickets(?HistoryBuyTickets $historyBuyTickets): self
+    {
+        $this->historyBuyTickets = $historyBuyTickets;
 
         return $this;
     }
