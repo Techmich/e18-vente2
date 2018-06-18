@@ -24,6 +24,7 @@ class HistoryBuyTickets
     private $Sold_date;
 
     /**
+	 * @ORM\Column(type="integer")
      * @ORM\OneToMany(targetEntity="App\Entity\Ticket", mappedBy="historyBuyTickets")
      */
     private $ticket_id;
