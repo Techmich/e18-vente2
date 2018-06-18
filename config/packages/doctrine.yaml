@@ -8,11 +8,11 @@ parameters:
 doctrine:
     dbal:
         # configure these for your database server
-        dbname: heroku_a69a2dc30a95123
+        dbname: heroku_ba370093c333adf
         host: us-cdbr-iron-east-04.cleardb.net
         port: 3306
-        user: b3982458fa493b
-        password: ef2ba817
+        user: b0d2fc33e4fbd0
+        password: d0bd9df5
         driver: 'pdo_mysql'
         server_version: '5.7'
         charset: utf8mb4
