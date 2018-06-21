@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -17,10 +19,6 @@ use Endroid\QrCode\QrCode;
  */
 class Ticket
 {
-    const SOLD = 'SOLD';
-    const RESERVED = 'RESERVED';
-    const NONE = 'NONE';
-
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -44,16 +42,14 @@ class Ticket
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Choice({"SOLD", "RESERVED", "NONE"}, message="Choose a valid status.")
-     * @ORM\Column(type="string", length=50)
-     */
-    private $status;
-
-    /**
-     * @Assert\NotBlank()
      * @ORM\Column(type="float")
      */
     private $price;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\TicketUser", mappedBy="ticket", orphanRemoval=true)
+     */
+    private $ticketUsers;
 
     /**
      * Ticket constructor.
@@ -62,7 +58,7 @@ class Ticket
     public function __construct()
     {
         $this->id2 = Uuid::uuid4();
-        $this->status = self::NONE;
+        $this->ticketUsers = new ArrayCollection();
     }
 
     public function getId()
@@ -98,18 +94,6 @@ class Ticket
         $this->show = $show;
     }
 
-    public function getStatus(): ?string
-    {
-        return $this->status;
-    }
-
-    public function setStatus(string $status): self
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
     public function getPrice(): ?float
     {
         return $this->price;
@@ -118,6 +102,37 @@ class Ticket
     public function setPrice(float $price): self
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|TicketUser[]
+     */
+    public function getTicketUsers(): Collection
+    {
+        return $this->ticketUsers;
+    }
+
+    public function addTicketUser(TicketUser $ticketUser): self
+    {
+        if (!$this->ticketUsers->contains($ticketUser)) {
+            $this->ticketUsers[] = $ticketUser;
+            $ticketUser->setTicket($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTicketUser(TicketUser $ticketUser): self
+    {
+        if ($this->ticketUsers->contains($ticketUser)) {
+            $this->ticketUsers->removeElement($ticketUser);
+            // set the owning side to null (unless already changed)
+            if ($ticketUser->getTicket() === $this) {
+                $ticketUser->setTicket(null);
+            }
+        }
 
         return $this;
     }
