@@ -36,7 +36,7 @@ class DataFixtures extends Fixture
             for ($j = 0; $j < 10; $j++){
                 $show = $this->getShow($j, $theater);
 
-                for ($j = 0; $j < 100; $j++){
+                for ($k = 0; $k < 100; $k++){
                     $manager->persist($this->getTicket($show));
                 }
                 $manager->persist($show);
@@ -53,7 +53,7 @@ class DataFixtures extends Fixture
         $show = new Show();
 
         $show->setTitle('Spectacle_'. $i);
-        $show->setArtist('Willy kouagnia '. $i);
+        $show->setArtist('Personna non grata '. $i);
         $show->setDate($date);
         $show->setDescription('Equitis Romani autem esse filium criminis loco poni 
             ab accusatoribus neque his iudicantibus oportuit neque defendentibus nobis. Nam quod 
