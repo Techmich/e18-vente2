@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\TicketUser;
+use App\Entity\CustomerTicket;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method TicketUser|null find($id, $lockMode = null, $lockVersion = null)
- * @method TicketUser|null findOneBy(array $criteria, array $orderBy = null)
- * @method TicketUser[]    findAll()
- * @method TicketUser[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method CustomerTicket|null find($id, $lockMode = null, $lockVersion = null)
+ * @method CustomerTicket|null findOneBy(array $criteria, array $orderBy = null)
+ * @method CustomerTicket[]    findAll()
+ * @method CustomerTicket[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class TicketUserRepository extends ServiceEntityRepository
+class CustomerTicketRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, TicketUser::class);
+        parent::__construct($registry, CustomerTicket::class);
     }
 
 //    /**
-//     * @return TicketUser[] Returns an array of TicketUser objects
+//     * @return CustomerTicket[] Returns an array of CustomerTicket objects
 //     */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class TicketUserRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?TicketUser
+    public function findOneBySomeField($value): ?CustomerTicket
     {
         return $this->createQueryBuilder('t')
             ->andWhere('t.exampleField = :val')
