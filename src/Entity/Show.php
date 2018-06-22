@@ -19,8 +19,8 @@ use App\Controller\ShowController;
  *     itemOperations={
  *         "delete","get","put",
  *         "reserved"={
- *             "method"="PUT",
- *             "path"="/show/{id}/reserved/",
+ *             "method"="GET",
+ *             "path"="/show/{id}/tickets/sold",
  *             "requirements"={"id"="\d+"},
  *             "controller"=ShowController::class
  *         }

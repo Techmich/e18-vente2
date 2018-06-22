@@ -4,7 +4,10 @@ namespace App\Repository;
 
 use App\Entity\Show;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use App\Entity\customerTicket;
+use App\Entity\Ticket;
 
 /**
  * @method Show|null find($id, $lockMode = null, $lockVersion = null)
@@ -47,4 +50,19 @@ class ShowRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function getCountTicketSold($showId)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '  SELECT count(t.id)
+                    FROM tickets t
+                    INNER JOIN customers_tickets t2 ON t.id = t2.ticket_id
+                    WHERE t.show_id = :show AND t2.sold_at IS NOT NULL';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(['show' => $showId]);
+
+        // returns an array of Product objects
+        return $stmt->fetch();
+    }
 }
