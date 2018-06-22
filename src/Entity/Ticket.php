@@ -47,7 +47,7 @@ class Ticket
     private $price;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\TicketUser", mappedBy="ticket", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\CustomerTicket", mappedBy="ticket", orphanRemoval=true)
      */
     private $ticketUsers;
 
@@ -107,14 +107,14 @@ class Ticket
     }
 
     /**
-     * @return Collection|TicketUser[]
+     * @return Collection|CustomerTicket[]
      */
     public function getTicketUsers(): Collection
     {
         return $this->ticketUsers;
     }
 
-    public function addTicketUser(TicketUser $ticketUser): self
+    public function addTicketUser(CustomerTicket $ticketUser): self
     {
         if (!$this->ticketUsers->contains($ticketUser)) {
             $this->ticketUsers[] = $ticketUser;
@@ -124,7 +124,7 @@ class Ticket
         return $this;
     }
 
-    public function removeTicketUser(TicketUser $ticketUser): self
+    public function removeTicketUser(CustomerTicket $ticketUser): self
     {
         if ($this->ticketUsers->contains($ticketUser)) {
             $this->ticketUsers->removeElement($ticketUser);

@@ -6,11 +6,21 @@ use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\TicketUserRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\CustomerTicketRepository")
  * @ORM\Table(name="customers_tickets")
- * @ApiResource
+ * @ApiResource(
+ *     itemOperations={
+ *         "get","put","delete"
+ *     },
+ *     collectionOperations ={
+ *         "get",
+ *         "post"={
+ *             "method"="POST", "path"="/customer_tickets"
+ *         }
+ *     }
+ * )
  */
-class TicketUser
+class CustomerTicket
 {
     /**
      * @ORM\Id()
@@ -45,14 +55,14 @@ class TicketUser
         return $this->id;
     }
 
-    public function getSoldedAt(): ?\DateTimeInterface
+    public function getSoldAt(): ?\DateTimeInterface
     {
-        return $this->soldedAt;
+        return $this->soldAt;
     }
 
-    public function setSoldedAt(?\DateTimeInterface $soldedAt): self
+    public function setSoldAt(?\DateTimeInterface $soldAt): self
     {
-        $this->soldedAt = $soldedAt;
+        $this->soldAt = $soldAt;
 
         return $this;
     }
