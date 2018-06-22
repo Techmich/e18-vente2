@@ -63,13 +63,6 @@ class Show
 
     /**
      * @Assert\Blank()
-     * @Assert\Url()
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $url;
-
-    /**
-     * @Assert\Blank()
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $image;
@@ -153,19 +146,6 @@ class Show
     public function setDescription(string $description): self
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getUrl(): ?string
-    {
-        return $this->url;
-    }
-
-    public function setUrl(?string $url): self
-    {
-        if($this->image != null)
-            $this->url = $url;
 
         return $this;
     }

@@ -22,7 +22,7 @@ class TicketUser
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $soldedAt;
+    private $soldAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
